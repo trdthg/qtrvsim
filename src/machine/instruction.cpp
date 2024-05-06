@@ -29,6 +29,7 @@ struct ArgumentDesc {
     /**
      * Possible values:
      *  @val g: gp register id
+     *  @val f: fp register id
      *  @val n: numeric immediate
      *  @val a: pc relative address offset
      *  @val b: pc relative address offset
