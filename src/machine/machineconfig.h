@@ -26,6 +26,11 @@ enum ConfigPresets {
     CP_PIPE            // Full pipelined cpu
 };
 
+enum ConfigLoadCodeFrom {
+    LoadCodeFromDwarf,
+    LoadCodeFromLocal
+};
+
 constexpr ConfigIsaWord config_isa_word_default = ConfigIsaWord::byChar('E') | ConfigIsaWord::byChar('I') |
         ConfigIsaWord::byChar('A') |ConfigIsaWord::byChar('M');
 
@@ -94,6 +99,7 @@ public:
     // Configure if CPU is pipelined
     // In default disabled.
     void set_pipelined(bool);
+    void set_load_code_from(enum ConfigLoadCodeFrom);
     // Configure if cpu should simulate delay slot in non-pipelined core
     // In default enabled. When disabled it also automatically disables
     // pipelining.
@@ -167,6 +173,7 @@ public:
 
 private:
     bool pipeline, delayslot;
+    enum ConfigLoadCodeFrom load_code_from;
     enum HazardUnit hunit;
     bool exec_protect, write_protect;
     unsigned mem_acc_read, mem_acc_write, mem_acc_burst, mem_acc_level2;

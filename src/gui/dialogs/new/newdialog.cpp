@@ -45,6 +45,12 @@ NewDialog::NewDialog(QWidget *parent, QSettings *settings) : QDialog(parent) {
         ui->pushButton_browse, &QAbstractButton::clicked, this,
         &NewDialog::browse_elf);
     connect(
+        ui->load_code_from_dwarf, &QAbstractButton::clicked, this,
+        &NewDialog::set_load_code_from);
+    connect(
+        ui->load_code_from_local, &QAbstractButton::clicked, this,
+        &NewDialog::set_load_code_from);
+    connect(
         ui->elf_file, &QLineEdit::textChanged, this, &NewDialog::elf_change);
     connect(
         ui->preset_no_pipeline, &QAbstractButton::toggled, this,
@@ -225,6 +231,15 @@ void NewDialog::set_preset() {
     unsigned pres_n = preset_number();
     if (pres_n > 0) {
         config->preset((enum machine::ConfigPresets)(pres_n - 1));
+        config_gui();
+    }
+}
+
+void NewDialog::set_load_code_from() {
+    unsigned pres_n = load_code_from_number();
+    printf("onclick pres_n: %d\n", pres_n);
+    if (pres_n > 0) {
+        config->set_load_code_from((enum machine::ConfigLoadCodeFrom)(pres_n - 1));
         config_gui();
     }
 }
@@ -414,6 +429,17 @@ unsigned NewDialog::preset_number() {
         preset = machine::CP_PIPE_NO_HAZARD;
     else if (ui->preset_pipelined->isChecked())
         preset = machine::CP_PIPE;
+    else
+        return 0;
+    return (unsigned)preset + 1;
+}
+
+unsigned NewDialog::load_code_from_number() {
+    enum machine::ConfigLoadCodeFrom preset;
+    if (ui->load_code_from_dwarf->isChecked())
+        preset = machine::LoadCodeFromDwarf;
+    else if (ui->load_code_from_local->isChecked())
+        preset = machine::LoadCodeFromLocal;
     else
         return 0;
     return (unsigned)preset + 1;

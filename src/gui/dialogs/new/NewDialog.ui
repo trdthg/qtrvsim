@@ -128,6 +128,30 @@
          </item>
         </layout>
        </item>
+       <item>
+        <widget class="QGroupBox" name="load_code_from_box">
+         <property name="title">
+          <string>Load C code?</string>
+         </property>
+        <layout class="QVBoxLayout" name="verticalLayout_load_code">
+        <item>
+        <widget class="QRadioButton" name="load_code_from_dwarf">
+        <property name="text">
+            <string>Extract C from DWARF</string>
+        </property>
+        </widget>
+        </item>
+        <item>
+        <widget class="QRadioButton" name="load_code_from_local">
+        <property name="text">
+            <string>Load C from local</string>
+        </property>
+        </widget>
+        </item>
+        </layout>
+        </widget>
+
+       </item>
       </layout>
      </widget>
      <widget class="QWidget" name="tab_core">

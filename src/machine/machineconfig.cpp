@@ -308,6 +308,10 @@ void MachineConfig::preset(enum ConfigPresets p) {
     }
 }
 
+void MachineConfig::set_load_code_from(enum ConfigLoadCodeFrom c) {
+    load_code_from = c;
+}
+
 void MachineConfig::set_pipelined(bool v) {
     pipeline = v;
 }

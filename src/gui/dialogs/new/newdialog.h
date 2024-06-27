@@ -31,6 +31,7 @@ private slots:
     void browse_elf();
     void elf_change(QString val);
     void set_preset();
+    void set_load_code_from();
     void xlen_64bit_change(bool);
     void isa_atomic_change(bool);
     void isa_multiply_change(bool);
@@ -62,6 +63,7 @@ private:
     void config_gui(); // Apply configuration to gui
 
     unsigned preset_number();
+    unsigned load_code_from_number();
     void load_settings();
     void store_settings();
     NewDialogCacheHandler *cache_handler_p {}, *cache_handler_d {}, *cache_handler_l2 {};
